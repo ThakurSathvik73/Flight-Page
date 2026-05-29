@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKYLine Travels | Premium Flight Booking</title>
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: #0072ff;
+            --secondary-glow: #00c6ff;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-muted-light: rgba(255, 255, 255, 0.7);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            overflow-x: hidden;
+        }
+
+
+        .section1 {
+            background-image: linear-gradient(to bottom, rgba(11, 15, 25, 0.6), rgba(11, 15, 25, 0.9)), url('flight1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh; 
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+
+        .navbar-custom {
+            background: rgba(15, 23, 42, 0.65) !important;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-brand h1 {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #fff 30%, var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-size: 1.05rem !important;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-custom:hover {
+            color: #fff !important;
+        }
+
+        .nav-link-custom::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link-custom:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+
+        .btn-signup-premium {
+            color: #fff !important;
+            border: 1px solid rgba(0, 198, 255, 0.4) !important;
+            background: rgba(0, 114, 255, 0.05);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        .btn-signup-premium:hover {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.2), rgba(0, 198, 255, 0.2)) !important;
+            border-color: #00c6ff !important;
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+
+        .card-booking {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .form-control, .form-select {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff !important;
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-select option {
+            background-color: #121824;
+            color: #fff;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(15, 23, 42, 0.7);
+            border-color: var(--secondary-glow);
+            box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+
+        .btn-search-premium {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 14px;
+            padding: 14px 40px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-search-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 198, 255, 0.45);
+            color: #fff;
+        }
+
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+           filter: invert(1) brightness(100%);
+           cursor: pointer;
+           opacity: 1;
+           transition: opacity 0.2s ease;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+           opacity: 1;
+        }
+
+
+        .flight-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 114, 255, 0.15);
+            border-color: rgba(0, 198, 255, 0.4);
+        }
+
+        .flight-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--primary-glow), var(--secondary-glow));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .flight-card:hover::before {
+            opacity: 1;
+        }
+
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.4), #fff);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+
+        .fade-transition {
+            opacity: 1;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+
+        .btn-book-now {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-book-now:hover {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
+        }
+
+ 
+        .summary-badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px 20px;
+        }
+
+
+        .payment-method-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .payment-method-card:hover, .payment-method-card.active {
+            border-color: var(--secondary-glow);
+            background: rgba(0, 198, 255, 0.08);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.2);
+        }
+
+
+        .ticket-receipt-card {
+            background: #fff;
+            border-radius: 20px;
+            color: #121824;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .ticket-header {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            padding: 24px;
+        }
+        .ticket-cutout-line {
+            border-top: 2px dashed #cbd5e1;
+            position: relative;
+            margin: 20px 0;
+        }
+        .ticket-cutout-line::before, .ticket-cutout-line::after {
+            content: '';
+            position: absolute;
+            top: -11px;
+            width: 22px;
+            height: 22px;
+            background: #0b0f19;
+            border-radius: 50%;
+        }
+        .ticket-cutout-line::before { left: -35px; }
+        .ticket-cutout-line::after { right: -35px; }
+    </style>
+</head>
+  
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#" onclick="window.location.reload();">
+      <img src="LOGO.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top me-3">
+      <h1 class="m-0">SKYLine Travels</h1>
+    </a>
+    
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto gap-4"> 
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#" onclick="window.location.reload();">Home</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="login.html">Login</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-signup-premium px-4 rounded-pill ms-2" href="signup.html">SignUp</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section class="section1 d-flex align-items-center pt-5">
+  <div class="container">
+
+    <div id="pageHeader" class="content text-center text-white mb-5">
+      <h1 class="display-4 fw-bold tracking-tight">Discover Premium Journey</h1>
+      <p class="lead mt-3 text-white-50 fs-4 max-w-2xl mx-auto">
+        Track local or global schedules dynamically with real-time operational datasets.
+      </p>
+    </div>
+
+
+    <div id="bookingModuleContainer" class="card card-booking p-4 p-md-5 fade-transition">
+      
+
+      <div id="searchFormLayout">
+        <form class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">From</label>
+            <input type="text" id="fromCity" class="form-control" placeholder="Departure City" value="Hyderabad">
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">To</label>
+            <input type="text" id="toCity" class="form-control" placeholder="e.g. Delhi, Mumbai, Bengaluru">
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3 ">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Departure Date</label>
+            <input type="date" class="form-control ">
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Return Date</label>
+            <input type="date" class="form-control">
+          </div>
+
+          <div class="col-12 col-sm-6 d-flex flex-column">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider mb-2">Number of Passengers</label>
+            <select id="passengersSelect" class="form-select w-100">
+              <option selected value="Any">Select Passengers (Any)</option>
+              <option value="1">1 Passenger</option>
+              <option value="2">2 Passengers</option>
+              <option value="3">3 Passengers</option>
+              <option value="4">4 Passengers</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-sm-6 d-flex flex-column">
+            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider mb-2">Travel Class</label>
+            <select id="classSelect" class="form-select w-100">
+              <option selected value="Any">Select Class (Any)</option>
+              <option value="Economy">Economy Class</option>
+              <option value="Business">Business Class</option>
+            </select>
+          </div>
+
+          <div class="col-12 pt-2 d-flex justify-content-center">
+            <button id="searchBtn" class="btn btn-search-premium btn-lg px-5">Search Schedules</button>
+          </div>
+        </form>
+      </div>
+
+
+      <div id="checkoutFormLayout" class="d-none">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 border-bottom border-secondary pb-3">
+            <button id="backToResultsBtn" class="btn btn-outline-light btn-sm rounded-pill px-3">← Change Flight</button>
+            <h3 class="text-white fw-bold m-0">Passenger Documentation</h3>
+        </div>
+
+
+        <div id="selectedFlightSummary" class="summary-badge text-white row g-3 mx-0 mb-4"></div>
+
+        <form id="passengerDataForm" class="row g-4">
+            <div class="col-md-6">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">First Name (As per Passport)</label>
+                <input type="text" id="passFirstName" class="form-control" required placeholder="John">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Last Name / Surname</label>
+                <input type="text" id="passLastName" class="form-control" required placeholder="Doe">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Email Address</label>
+                <input type="email" id="passEmail" class="form-control" required placeholder="johndoe@example.com">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Contact Phone Number</label>
+                <input type="tel" class="form-control" required placeholder="+91 98765 43210">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Passport Number (For International Flights)</label>
+                <input type="text" class="form-control" placeholder="Optional for Domestic">
+            </div>
+            <div class="col-md-6 d-flex flex-column">
+                <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider mb-2">Meal Selection Preference</label>
+                <select id="passMeal" class="form-select w-100">
+                    <option selected>Standard Continental Meal</option>
+                    <option>Vegetarian Hindu Meal </option>
+                    <option>Asian Vegetarian Meal</option>
+                    <option>Diabetic Friendly Meal</option>
+                    <option>No Meal Preference</option>
+                </select>
+            </div>
+            <div class="col-12 pt-3 d-flex justify-content-center">
+                <button type="submit" class="btn btn-search-premium btn-lg px-5">Proceed to Payment Terminal</button>
+            </div>
+        </form>
+      </div>
+
+
+      <div id="paymentFormLayout" class="d-none">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 border-bottom border-secondary pb-3">
+            <button id="backToPassengerBtn" class="btn btn-outline-light btn-sm rounded-pill px-3">← Passenger Details</button>
+            <h3 class="text-white fw-bold m-0">Secure Gateway Terminal</h3>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-5 d-flex flex-column gap-3">
+                <div class="payment-method-card text-white active" onclick="switchPaymentView('cardPayment')">
+                    <h5 class="fw-bold mb-1">💳 Credit / Debit Card</h5>
+                    <span class="text-white-50 small">Visa, MasterCard, Amex supported</span>
+                </div>
+                <div class="payment-method-card text-white" onclick="switchPaymentView('upiPayment')">
+                    <h5 class="fw-bold mb-1">📱 UPI Smart Transfer</h5>
+                    <span class="text-white-50 small">Instant settlement via BHIM, GPay, PhonePe</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-7 text-white">
+
+                <div id="cardPaymentLayout" class="bg-dark rgba(15,23,42,0.3) p-4 rounded-4 border border-secondary border-opacity-25">
+                    <form id="cardPaymentForm" class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Cardholder Full Name</label>
+                            <input type="text" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Credit Card Number</label>
+                            <input type="text" class="form-control" required placeholder="4321 •••• •••• 8901" maxlength="19">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Expiry Date</label>
+                            <input type="text" class="form-control" required placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label text-white-50 small fw-bold text-uppercase tracking-wider">Security CVV Code</label>
+                            <input type="password" class="form-control" required placeholder="•••" maxlength="3">
+                        </div>
+                        <div class="col-12 pt-3">
+                            <button type="submit" class="btn btn-search-premium w-100 py-3">Authorize Payment Transaction</button>
+                        </div>
+                    </form>
+                </div>
+
+ 
+                <div id="upiPaymentLayout" class="d-none bg-dark rgba(15,23,42,0.3) p-4 rounded-4 border border-secondary border-opacity-25 text-center">
+                    <h5 class="fw-bold mb-3">Scan Instant QR Code Interface</h5>
+
+                    <div class="bg-white p-3 d-inline-block rounded-3 mb-3">
+                        <div style="width:160px; height:160px; background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 0% 0%/20px 20px;"></div>
+                    </div>
+                    <p class="text-white-50 small mb-3">Alternatively enter your Virtual Payment Address (VPA)</p>
+                    <form id="upiPaymentForm" class="row g-3 justify-content-center">
+                        <div class="col-10 col-md-8">
+                            <input type="text" class="form-control text-center" required placeholder="username@upi">
+                        </div>
+                        <div class="col-10 col-md-8">
+                            <button type="submit" class="btn btn-search-premium w-100 py-2">Verify & Request Collect</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div id="confirmationLayout" class="d-none">
+         <div class="text-center text-white mb-4 animate__animated animate__zoomIn">
+             <div class="display-3 text-success mb-2">✓</div>
+             <h3 class="fw-bold">Transaction Successfully Authorized!</h3>
+             <p class="text-white-50">Your premium flight ticket allocation process has concluded cleanly.</p>
+         </div>
+
+
+         <div class="ticket-receipt-card mx-auto max-w-2xl">
+             <div class="ticket-header d-flex justify-content-between align-items-center">
+                 <div>
+                     <h4 id="confAirline" class="fw-bold m-0 text-uppercase tracking-wide">Airline</h4>
+                     <span class="small text-white-50">SKYLine Travels Digital Receipt</span>
+                 </div>
+                 <div class="text-end">
+                     <span class="d-block small text-white-50">PNR CODE REFERENCE</span>
+                     <h4 id="confPnr" class="fw-bold m-0 text-warning">SKYL7301</h4>
+                 </div>
+             </div>
+
+             <div class="p-4 p-md-5">
+                 <div class="row g-4 text-dark mb-2">
+                     <div class="col-12 col-md-6">
+                         <span class="text-muted d-block small text-uppercase">Primary Traveler Legal Name</span>
+                         <h5 id="confName" class="fw-bold">John Doe</h5>
+                     </div>
+                     <div class="col-6 col-md-3">
+                         <span class="text-muted d-block small text-uppercase">Travel Cabin Class</span>
+                         <h5 id="confClass" class="fw-bold">Economy</h5>
+                     </div>
+                     <div class="col-6 col-md-3">
+                         <span class="text-muted d-block small text-uppercase">Assigned Flight Code</span>
+                         <h5 id="confCode" class="fw-bold">6E-944</h5>
+                     </div>
+
+                     <div class="col-5">
+                         <span class="text-muted d-block small text-uppercase">Origin Hub</span>
+                         <h4 class="fw-bold text-primary m-0">HYD (Hyderabad)</h4>
+                     </div>
+                     <div class="col-2 text-center align-self-end">
+                         <span class="fs-4 text-muted">&rarr;</span>
+                     </div>
+                     <div class="col-5 text-end">
+                         <span class="text-muted d-block small text-uppercase">Destination Destination</span>
+                         <h4 id="confDest" class="fw-bold text-primary m-0">DEL (Delhi)</h4>
+                     </div>
+                 </div>
+
+                 <div class="ticket-cutout-line"></div>
+
+                 <div class="row g-3 text-dark style-ticket-footer small pt-1">
+                     <div class="col-4">
+                         <span class="text-muted d-block text-uppercase">Departure Window</span>
+                         <strong id="confTime">08:30 PM</strong>
+                     </div>
+                     <div class="col-4 text-center">
+                         <span class="text-muted d-block text-uppercase">Gate Allocation</span>
+                         <strong>T3 - Gate 14B</strong>
+                     </div>
+                     <div class="col-4 text-end">
+                         <span class="text-muted d-block text-uppercase">Seat Index</span>
+                         <strong id="confSeat">12F (Window)</strong>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         <div class="text-center mt-4">
+             <button class="btn btn-outline-light rounded-pill px-4" onclick="window.location.reload();">Return to Main Dash</button>
+         </div>
+      </div>
+
+    </div>
+
+
+    <div id="flightResults" class="row g-4 mt-5"></div>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const searchBtn = document.getElementById("searchBtn");
+const resultDiv = document.getElementById("flightResults");
+const bookingModuleContainer = document.getElementById("bookingModuleContainer");
+const searchFormLayout = document.getElementById("searchFormLayout");
+const checkoutFormLayout = document.getElementById("checkoutFormLayout");
+const paymentFormLayout = document.getElementById("paymentFormLayout");
+const confirmationLayout = document.getElementById("confirmationLayout");
+
+const backToResultsBtn = document.getElementById("backToResultsBtn");
+const backToPassengerBtn = document.getElementById("backToPassengerBtn");
+const pageHeader = document.getElementById("pageHeader");
+
+
+let globalFetchedFlights = []; 
+let activeSelectedFlightData = {};
+
+searchBtn.addEventListener("click", async function(e) {
+    e.preventDefault();
+
+    const fromInput = document.getElementById("fromCity").value.trim().toLowerCase();
+    const toInput = document.getElementById("toCity").value.trim().toLowerCase();
+    const passengersInput = document.getElementById("passengersSelect").value;
+    const travelClassInput = document.getElementById("classSelect").value;
+    
+    if (!fromInput || !toInput) {
+        resultDiv.innerHTML = `
+            <div class="col-12 text-center text-warning mt-4">
+                <div class="p-3 rounded-3 rgba(255,193,7,0.1) border border-warning d-inline-block">
+                     <h5 class="m-0">⚠️ Missing input fields. Please input origin and destination parameters.</h5>
+                </div>
+            </div>`;
+        return;
+    }
+
+    resultDiv.innerHTML = `<div class="text-center col-12 my-5"><h3 class="shimmer-text fw-bold">Analyzing Live Flight Data Indexes...</h3></div>`;
+
+    try {
+        const response = await fetch("https://api.flightapi.io/schedule/v2/6a19a6365d15e962a0c931c0?mode=dep&iata=HYD&year=2026&month=5&day=29&page=4");
+        const jsonResponse = await response.json();
+
+        const datasetOriginCity = jsonResponse.data?.header?.departureAirport?.city?.toLowerCase() || "hyderabad";
+        const datasetOriginIata = jsonResponse.data?.header?.departureAirport?.fs?.toLowerCase() || "hyd";
+
+        if (fromInput !== datasetOriginCity && fromInput !== datasetOriginIata) {
+            resultDiv.innerHTML = `
+                <div class="col-12 text-center text-white mt-4">
+                    <div class="card card-booking p-4 d-inline-block">
+                        <h4 class="text-warning mb-2">Origin Not Serviced</h4>
+                        <p class="text-white-50 m-0">This operation scope is explicitly configured for real-time scheduled departures leaving <strong>Hyderabad (HYD)</strong>.</p>
+                    </div>
+                </div>`;
+            return;
+        }
+
+        globalFetchedFlights = jsonResponse.data?.flights || [];
+
+        const filteredFlights = globalFetchedFlights.filter(flight => {
+            return flight.airport?.city?.toLowerCase() === toInput || 
+                   flight.airport?.fs?.toLowerCase() === toInput;
+        });
+
+        resultDiv.innerHTML = "";
+
+        if (filteredFlights.length === 0) {
+            resultDiv.innerHTML = `
+                <div class="col-12 text-center text-white mt-4">
+                     <div class="card card-booking p-4 d-inline-block">
+                        <h4 class="text-danger mb-2">Destination Unreachable</h4>
+                        <p class="text-white-50 m-0">No departures found matching your targeted location route indices today.</p>
+                     </div>
+                </div>`;
+            return;
+        }
+
+        filteredFlights.forEach((flight, index) => {
+            const displayClass = travelClassInput === "Any" ? (Math.random() > 0.35 ? "Economy" : "Business") : travelClassInput;
+            const displayPassengers = passengersInput === "Any" ? Math.floor(Math.random() * 4) + 1 : passengersInput;
+            const simulatedPrice = displayClass === "Business" ? "₹16,400" : "₹4,800";
+            const flightCodeStr = `${flight.carrier?.fs || '6E'}-${flight.carrier?.flightNumber || '101'}`;
+
+            resultDiv.innerHTML += `
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card flight-card p-4 shadow">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-primary fw-bold mb-0" style="letter-spacing:-0.5px;">${flight.carrier?.name || 'Airline'}</h4>
+                        <span class="badge ${displayClass === 'Business' ? 'bg-primary-subtle text-primary border border-primary-subtle' : 'bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle'} px-3 py-2 rounded-pill small fw-bold">${displayClass}</span>
+                    </div>
+                    
+                    <h5 class="fw-bold text-dark mb-3 d-flex align-items-center">
+                        <span>HYD</span>
+                        <span class="text-muted mx-3" style="font-size: 1.1rem; font-weight:300;">&rarr;</span>
+                        <span class="text-primary">${(flight.airport?.fs || 'DEST').toUpperCase()}</span>
+                    </h5>
+                    
+                    <div class="row g-2 mb-3 bg-light p-3 rounded-3" style="font-size: 0.9rem;">
+                        <div class="col-6">
+                            <span class="text-muted d-block small text-uppercase">Departing</span>
+                            <strong class="text-dark">${flight.departureTime?.timeAMPM || 'N/A'}</strong>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-muted d-block small text-uppercase">Arriving</span>
+                            <strong class="text-dark">${flight.arrivalTime?.timeAMPM || 'N/A'}</strong>
+                        </div>
+                    </div>
+
+                    <p class="mb-1 text-muted small"><strong>Destination Hub:</strong> ${flight.airport?.city || 'Unknown'}</p>
+                    <p class="mb-1 text-muted small"><strong>Flight Code:</strong> ${flightCodeStr}</p>
+                    
+                    ${flight.operatedBy ? `<div class="mt-2 alert alert-info py-1 px-2 border-0 mb-3" style="font-size:0.78rem; border-radius: 6px;">ℹ️ ${flight.operatedBy}</div>` : ''}
+                    
+                    <hr class="text-muted opacity-25 my-3">
+                    
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                        <div>
+                            <span class="text-muted d-block" style="font-size:0.75rem;">Estimated Price</span>
+                            <h4 class="text-success fw-bold m-0" style="font-size: 1.4rem; letter-spacing: -0.5px;">${simulatedPrice}</h4>
+                        </div>
+                        <button class="btn btn-book-now px-4 py-2" onclick="initializeCheckout('${flight.carrier?.name}', '${flight.airport?.city}', '${flight.airport?.fs}', '${flight.departureTime?.timeAMPM}', '${simulatedPrice}', '${displayClass}', '${displayPassengers}', '${flightCodeStr}')">Book Now</button>
+                    </div>
+                </div>
+            </div>`;
+        });
+
+    } catch (error) {
+        console.error("Critical Runtime Interface Catch:", error);
+        resultDiv.innerHTML = `
+            <div class="col-12 text-center text-danger mt-4">
+                <div class="p-3 rounded-3 bg-danger-subtle border border-danger d-inline-block">
+                    <h5 class="m-0">Network Sync Failure. Failed to pull JSON endpoint matrix seamlessly.</h5>
+                </div>
+            </div>`;
+    }
+});
+
+function initializeCheckout(airline, city, code, time, price, travelClass, passengers, flightCode) {
+   
+    activeSelectedFlightData = { airline, city, code, time, price, travelClass, passengers, flightCode };
+
+    bookingModuleContainer.classList.add('fade-out');
+    setTimeout(() => {
+        pageHeader.querySelector('h1').innerText = "Complete Your Reservation";
+        pageHeader.querySelector('p').innerText = "Please provide exact legal traveler credentials mapping directly to passport or government documentation profiles.";
+
+        searchFormLayout.classList.add('d-none');
+        resultDiv.classList.add('d-none');
+        checkoutFormLayout.classList.remove('d-none');
+
+        document.getElementById("selectedFlightSummary").innerHTML = `
+            <div class="col-6 col-md-3"><strong>Carrier:</strong><br><span class="text-info">${airline}</span></div>
+            <div class="col-6 col-md-3"><strong>Route Indices:</strong><br>HYD &rarr; ${code.toUpperCase()} (${city})</div>
+            <div class="col-6 col-md-3"><strong>Departure Window:</strong><br>${time} | ${travelClass}</div>
+            <div class="col-6 col-md-3 text-md-end"><strong>Total Cost (${passengers} Pax):</strong><br><h4 class="text-success fw-bold m-0">${price}</h4></div>
+        `;
+
+        bookingModuleContainer.classList.remove('fade-out');
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }, 400);
+}
+
+ 
+document.getElementById('passengerDataForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    bookingModuleContainer.classList.add('fade-out');
+    setTimeout(() => {
+        pageHeader.querySelector('h1').innerText = "Premium Secure Settlement";
+        pageHeader.querySelector('p').innerText = "Authorize downstream transaction tokens using automated high-encryption gateways securely.";
+
+        checkoutFormLayout.classList.add('d-none');
+        paymentFormLayout.classList.remove('d-none');
+        
+        bookingModuleContainer.classList.remove('fade-out');
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }, 400);
+});
+
+
+function switchPaymentView(viewType) {
+   
+    const methodCards = document.querySelectorAll('.payment-method-card');
+    methodCards.forEach(card => card.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    if (viewType === 'cardPayment') {
+        document.getElementById('cardPaymentLayout').classList.remove('d-none');
+        document.getElementById('upiPaymentLayout').classList.add('d-none');
+    } else {
+        document.getElementById('cardPaymentLayout').classList.add('d-none');
+        document.getElementById('upiPaymentLayout').classList.remove('d-none');
+    }
+}
+
+
+document.getElementById('cardPaymentForm').addEventListener('submit', handleFinalConfirmation);
+document.getElementById('upiPaymentForm').addEventListener('submit', handleFinalConfirmation);
+
+function handleFinalConfirmation(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById('passFirstName').value.trim();
+    const lastName = document.getElementById('passLastName').value.trim();
+    
+    bookingModuleContainer.classList.add('fade-out');
+    setTimeout(() => {
+        pageHeader.querySelector('h1').innerText = "Reservation Finalized";
+        pageHeader.querySelector('p').innerText = "Your electronic transit document indices have been registered cleanly inside international scheduling terminals.";
+
+        paymentFormLayout.classList.add('d-none');
+        confirmationLayout.classList.remove('d-none');
+
+
+        document.getElementById('confAirline').innerText = activeSelectedFlightData.airline;
+        document.getElementById('confName').innerText = `${firstName} ${lastName}`.toUpperCase();
+        document.getElementById('confClass').innerText = activeSelectedFlightData.travelClass;
+        document.getElementById('confCode').innerText = activeSelectedFlightData.flightCode;
+        document.getElementById('confDest').innerText = `${activeSelectedFlightData.code.toUpperCase()} (${activeSelectedFlightData.city})`;
+        document.getElementById('confTime').innerText = activeSelectedFlightData.time;
+        
+
+        document.getElementById('confPnr').innerText = 'SKYL' + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('confSeat').innerText = Math.floor(1 + Math.random() * 30) + ['A','B','C','D','E','F'][Math.floor(Math.random() * 6)] + ' (Window)';
+
+        bookingModuleContainer.classList.remove('fade-out');
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }, 400);
+}
+
+
+backToResultsBtn.addEventListener("click", function() {
+    bookingModuleContainer.classList.add('fade-out');
+    setTimeout(() => {
+        pageHeader.querySelector('h1').innerText = "Discover Premium Journey";
+        pageHeader.querySelector('p').innerText = "Track local or global schedules dynamically with real-time operational datasets.";
+
+        checkoutFormLayout.classList.add('d-none');
+        searchFormLayout.classList.remove('d-none');
+        resultDiv.classList.remove('d-none');
+
+        bookingModuleContainer.classList.remove('fade-out');
+    }, 400);
+});
+
+backToPassengerBtn.addEventListener("click", function() {
+    bookingModuleContainer.classList.add('fade-out');
+    setTimeout(() => {
+        pageHeader.querySelector('h1').innerText = "Complete Your Reservation";
+        pageHeader.querySelector('p').innerText = "Please provide exact legal traveler credentials mapping directly to passport or government documentation profiles.";
+
+        paymentFormLayout.classList.add('d-none');
+        checkoutFormLayout.classList.remove('d-none');
+
+        bookingModuleContainer.classList.remove('fade-out');
+    }, 400);
+});
+</script>   
+</body>
+</html>
